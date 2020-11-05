@@ -6,15 +6,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import static com.xnj.tank.Dir.*;
+
 /**
  * @author chen xuanyi
  * @create 2020-11-05 15:26
  */
 public class TankFrame extends Frame {
 
-    int x = 200, y = 200;
-    Dir dir = Dir.DOWN;
-    private static final  int SPEED = 10;
+    Tank tank = new Tank(200,200,Dir.DOWN);
+
 
     public TankFrame() throws HeadlessException {
         //设置窗口大小
@@ -41,26 +42,12 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
 //        System.out.println("print");
-        g.fillRect(x,y,50,50);
+//        g.fillRect(x,y,50,50);
 //        x += 10;
 //        y += 10;
+        tank.paint(g);
 
-        switch (dir){
-            case LEFT:
-                x -= SPEED;
-                break;
-            case UP:
-                y -= SPEED;
-                break;
-            case RIGHT:
-                x += SPEED;
-                break;
-            case DOWN:
-                y += SPEED;
-                break;
-            default:
-                break;
-        }
+
 
     }
 
@@ -128,16 +115,16 @@ public class TankFrame extends Frame {
 
         private void setMainTankDir() {
             if (bL) {
-                dir = Dir.LEFT;
+                tank.setDir(LEFT);
             }
             if (bU) {
-                dir = Dir.UP;
+                tank.setDir(UP);
             }
             if (bR) {
-                dir = Dir.RIGHT;
+                tank.setDir(RIGHT);
             }
             if (bD) {
-                dir = Dir.DOWN;
+                tank.setDir(DOWN);
             }
         }
 
