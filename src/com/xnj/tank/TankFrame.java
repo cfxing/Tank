@@ -5,6 +5,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import static com.xnj.tank.Dir.*;
 
@@ -14,12 +17,19 @@ import static com.xnj.tank.Dir.*;
  */
 public class TankFrame extends Frame {
 
-    Tank tank = new Tank(200,200,Dir.DOWN);
+    Tank tank = new Tank(200,400,Dir.UP, this);
+    List<Bullet> bullets = new ArrayList<Bullet>();
+//    Bullet b = new Bullet(300, 300, DOWN);
+
+    List<Tank> tanks = new ArrayList<Tank>();
+
+    //将游戏界面抽话出来
+    static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 
 
     public TankFrame() throws HeadlessException {
         //设置窗口大小
-        this.setSize(800, 600);
+        this.setSize(GAME_WIDTH, GAME_HEIGHT);
         //设置窗口是否可以随便改变大小
         this.setResizable(false);
         //设置标题
@@ -39,14 +49,75 @@ public class TankFrame extends Frame {
         });
     }
 
+    //使用双缓冲解决闪烁问题
+    Image offScreenImage = null;
+    @Override
+    public void update(Graphics g){
+        if (offScreenImage == null){
+            offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
+        }
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color c = gOffScreen.getColor();
+        //重新画背景
+        gOffScreen.setColor(Color.BLACK);
+        gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+
+        gOffScreen.setColor(c);
+        paint(gOffScreen);
+        g.drawImage(offScreenImage, 0, 0, null);
+    }
+
     @Override
     public void paint(Graphics g) {
 //        System.out.println("print");
 //        g.fillRect(x,y,50,50);
 //        x += 10;
 //        y += 10;
+
+        //修改颜色
+        //保存之前颜色
+        Color c = g.getColor();
+        //修改颜色
+        g.setColor(Color.WHITE);
+        g.drawString("子弹的数量" + bullets.size(), 10, 60);
+        g.drawString("敌人的数量" + tanks.size(), 10, 80);
+
+        //恢复原来的颜色
+        g.setColor(c);
+
         tank.paint(g);
 
+//        b.paint(g);
+
+        //此方法删除子弹会报错
+//        for (Bullet b: bullets){
+//            b.paint(g);
+//        }
+
+        for (int i = 0; i < bullets.size(); i++){
+            bullets.get(i).paint(g);
+        }
+
+        //画坦克
+        for (int i = 0 ; i < tanks.size(); i++){
+            tanks.get(i).paint(g);
+        }
+
+        //碰撞检测
+        for(int i = 0; i < bullets.size(); i++){
+            for (int j = 0; j < tanks.size(); j++){
+
+                bullets.get(i).collideWith(tanks.get(j));
+            }
+        }
+
+        //删除子弹的另一种代码
+//        for (Iterator<Bullet> it = bullets.iterator(); it.hasNext();){
+//            Bullet b = it.next();
+//            if (!b.live){
+//                it.remove();
+//            }
+//        }
 
 
     }
@@ -81,6 +152,9 @@ public class TankFrame extends Frame {
 //                    y += 10;
                     bD = true;
                     break;
+                case KeyEvent.VK_SPACE:
+                    tank.fire();
+                    break;
                 default:
                     break;
             }
@@ -114,17 +188,23 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
-            if (bL) {
-                tank.setDir(LEFT);
-            }
-            if (bU) {
-                tank.setDir(UP);
-            }
-            if (bR) {
-                tank.setDir(RIGHT);
-            }
-            if (bD) {
-                tank.setDir(DOWN);
+            if (!bL && !bU && !bR && !bD){
+                tank.setMoving(false);
+            }else{
+                tank.setMoving(true);
+
+                if (bL) {
+                    tank.setDir(LEFT);
+                }
+                if (bU) {
+                    tank.setDir(UP);
+                }
+                if (bR) {
+                    tank.setDir(RIGHT);
+                }
+                if (bD) {
+                    tank.setDir(DOWN);
+                }
             }
         }
 
