@@ -30,7 +30,7 @@ public class TankFrame extends Frame {
     List<Explode> explodes = new ArrayList<>();
 
     //将游戏界面抽话出来
-    static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    static final int GAME_WIDTH = PropertyMgr.getInt("gameWidth"), GAME_HEIGHT = PropertyMgr.getInt("gameHeight");
 
 
     public TankFrame() throws HeadlessException {

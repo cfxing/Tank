@@ -1,0 +1,6 @@
+#初始坦克有多少个敌方坦克
+initTankCount=10
+tankSpeed=5
+bulletSpeed=15
+gameWidth=1080
+gameHeight=720

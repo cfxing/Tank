@@ -7,7 +7,7 @@ import java.awt.*;
  * @create 2020-11-05 20:32
  */
 public class Bullet {
-    private static final int SPEED = 15;
+    private static final int SPEED = PropertyMgr.getInt("bulletSpeed");
 //    private static int WIDTH = 20, HEIGHT = 20;
     //图片子弹的宽和高
     public static int WIDTH = ResourceMgr.bulletD.getWidth();

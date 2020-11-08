@@ -11,7 +11,7 @@ import java.util.Random;
 public class Tank {
     private int x, y;
     private Dir dir;
-    private static final int SPEED = 5;
+    private static final int SPEED = PropertyMgr.getInt("tankSpeed");
 
     public static int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static int HEIGHT = ResourceMgr.goodTankU.getHeight();

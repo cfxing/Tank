@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="252309ec-74ac-4f50-a916-473365c3f2d1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/com/xnj/tank/PropertyMgr.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankByNew/com/xnj/tank/Bullet$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankByNew/com/xnj/tank/Bullet$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankByNew/com/xnj/tank/Bullet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankByNew/com/xnj/tank/Bullet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankByNew/com/xnj/tank/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankByNew/com/xnj/tank/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankByNew/com/xnj/tank/ResourceMgr.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankByNew/com/xnj/tank/ResourceMgr.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankByNew/com/xnj/tank/TankFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankByNew/com/xnj/tank/TankFrame$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankByNew/com/xnj/tank/TankFrame$MyKeyListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankByNew/com/xnj/tank/TankFrame$MyKeyListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankByNew/com/xnj/tank/TankFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankByNew/com/xnj/tank/TankFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/xnj/tank/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xnj/tank/Bullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/xnj/tank/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xnj/tank/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/xnj/tank/Tank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xnj/tank/Tank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/xnj/tank/TankFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xnj/tank/TankFrame.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,11 +22,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+            <state relative-caret-position="266">
+              <caret line="15" column="61" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -36,31 +35,24 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/ImageUtil.java">
+        <entry file="file://$PROJECT_DIR$/src/config">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="7" column="79" selection-start-line="7" selection-start-column="79" selection-end-line="7" selection-end-column="79" />
+            <state relative-caret-position="57">
+              <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/Audio.java">
+        <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/PropertyMgr.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1273">
-              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/Tank.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="160" column="107" selection-start-line="160" selection-start-column="107" selection-end-line="160" selection-end-column="107" />
+            <state relative-caret-position="380">
+              <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4445#4446#0" expanded="true" />
+                <element signature="e#649#650#0" expanded="true" />
+                <element signature="e#710#711#0" expanded="true" />
+                <element signature="e#824#825#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -69,35 +61,31 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/Bullet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="121" column="51" selection-start-line="121" selection-start-column="51" selection-end-line="121" selection-end-column="51" />
-              <folding>
-                <element signature="e#552#553#0" expanded="true" />
-                <element signature="e#580#581#0" expanded="true" />
-                <element signature="e#621#622#0" expanded="true" />
-                <element signature="e#655#656#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="171">
+              <caret line="9" column="68" selection-start-line="9" selection-start-column="68" selection-end-line="9" selection-end-column="68" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/ResourceMgr.java">
+        <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/Tank.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="34" column="53" selection-start-line="34" selection-start-column="53" selection-end-line="34" selection-end-column="53" />
+            <state relative-caret-position="247">
+              <caret line="13" column="66" selection-start-line="13" selection-start-column="66" selection-end-line="13" selection-end-column="66" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#4410#4411#0" expanded="true" />
+                <element signature="e#4445#4446#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/TankFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+            <state relative-caret-position="209">
+              <caret line="32" column="111" selection-start-line="32" selection-start-column="111" selection-end-line="32" selection-end-column="111" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;class#TankFrame#0" />
@@ -109,10 +97,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/Explode.java">
+        <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/ResourceMgr.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="31" column="35" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
+            <state relative-caret-position="646">
+              <caret line="34" column="53" selection-start-line="34" selection-start-column="53" selection-end-line="34" selection-end-column="53" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -146,20 +137,25 @@
         <option value="$PROJECT_DIR$/src/com/xnj/tank/Explode.java" />
         <option value="$PROJECT_DIR$/src/com/xnj/tank/ImageUtil.java" />
         <option value="$PROJECT_DIR$/src/com/xnj/tank/ResourceMgr.java" />
+        <option value="$PROJECT_DIR$/src/com/xnj/tank/config" />
+        <option value="$PROJECT_DIR$/src/com/xnj/tank/PropertyMgr.java" />
         <option value="$PROJECT_DIR$/src/com/xnj/tank/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/xnj/tank/Bullet.java" />
         <option value="$PROJECT_DIR$/src/com/xnj/tank/Tank.java" />
+        <option value="$PROJECT_DIR$/src/config" />
+        <option value="$PROJECT_DIR$/src/com/xnj/tank/Bullet.java" />
         <option value="$PROJECT_DIR$/src/com/xnj/tank/TankFrame.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="36" />
-    <option name="y" value="5" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="132" />
+    <option name="y" value="27" />
     <option name="width" value="754" />
     <option name="height" value="1040" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -177,6 +173,12 @@
               <item name="TankByNew" type="b2602c69:ProjectViewProjectNode" />
               <item name="TankByNew" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TankByNew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TankByNew" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="tank" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -201,6 +203,11 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\19453\IdeaProjects\TankByNew\src" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -241,6 +248,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PropertyMgr" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.xnj.tank.PropertyMgr" />
+      <module name="TankByNew" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xnj.tank.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ImageTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TankByNew" />
       <extension name="coverage">
@@ -260,6 +280,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.PropertyMgr" />
         <item itemvalue="Application.Audio" />
         <item itemvalue="JUnit.ImageTest.test" />
       </list>
@@ -279,7 +300,7 @@
       <workItem from="1604649745776" duration="9683000" />
       <workItem from="1604716318543" duration="4035000" />
       <workItem from="1604720417002" duration="2752000" />
-      <workItem from="1604814667748" duration="11825000" />
+      <workItem from="1604814667748" duration="14993000" />
     </task>
     <task id="LOCAL-00001" summary="完成多个敌方坦克，碰撞检测">
       <created>1604721792557</created>
@@ -302,7 +323,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604835599277</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="完成敌方坦克随机移动，随机发射子弹，区分敌我双方坦克模型，完成边界检测">
+      <created>1604835646563</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1604835646563</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -311,13 +339,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41202000" />
+    <option name="totallyTimeSpent" value="44370000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="214" y="22" width="603" height="832" extended-state="0" />
+    <frame x="106" y="42" width="603" height="832" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.39963168" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.41252303" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -326,7 +354,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31321838" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49787235" weight="0.31412104" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3031609" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -335,7 +363,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32905984" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50212765" side_tool="true" weight="0.31412104" />
       <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -358,36 +386,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="完成敌方坦克随机移动，随机发射子弹，区分敌我双方坦克模型，完成边界检测" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/Dir.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/Group.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/ImageTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/images/e1.gif">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/images/e2.gif">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/images/e3.gif">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -433,9 +431,6 @@
     <entry file="file://$PROJECT_DIR$/src/images/missileLD.gif">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/images/missileLU.gif">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/images/square2.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -478,12 +473,6 @@
     <entry file="file://$PROJECT_DIR$/src/images/bulletL.gif">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/images/BadTank2.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/images/bulletD.gif">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/images/bulletU.gif">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -518,14 +507,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/ImageUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="7" column="79" selection-start-line="7" selection-start-column="79" selection-end-line="7" selection-end-column="79" />
+        <state relative-caret-position="247">
+          <caret line="15" column="49" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/images/tankRD.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/images/tankLU.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/images/bulletD.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/images/BadTank2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/images/square3.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/images/missileLU.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/ResourceMgr.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
+        <state relative-caret-position="646">
           <caret line="34" column="53" selection-start-line="34" selection-start-column="53" selection-end-line="34" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -533,49 +540,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/Bullet.java">
+    <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/PropertyMgr.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="121" column="51" selection-start-line="121" selection-start-column="51" selection-end-line="121" selection-end-column="51" />
-          <folding>
-            <element signature="e#552#553#0" expanded="true" />
-            <element signature="e#580#581#0" expanded="true" />
-            <element signature="e#621#622#0" expanded="true" />
-            <element signature="e#655#656#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/Tank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="160" column="107" selection-start-line="160" selection-start-column="107" selection-end-line="160" selection-end-column="107" />
+        <state relative-caret-position="380">
+          <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4445#4446#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/TankFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;class#TankFrame#0" />
-            <element signature="method#TankFrame#0;class#TankFrame#0" />
-            <element signature="method#update#0;class#TankFrame#0" />
+            <element signature="e#649#650#0" expanded="true" />
+            <element signature="e#710#711#0" expanded="true" />
+            <element signature="e#824#825#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+        <state relative-caret-position="266">
+          <caret line="15" column="61" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/Tank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="66" selection-start-line="13" selection-start-column="66" selection-end-line="13" selection-end-column="66" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4410#4411#0" expanded="true" />
+            <element signature="e#4445#4446#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/Bullet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="68" selection-start-line="9" selection-start-column="68" selection-end-line="9" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xnj/tank/TankFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="32" column="111" selection-start-line="32" selection-start-column="111" selection-end-line="32" selection-end-column="111" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#TankFrame#0" />
+            <element signature="method#TankFrame#0;class#TankFrame#0" />
+            <element signature="method#update#0;class#TankFrame#0" />
           </folding>
         </state>
       </provider>
