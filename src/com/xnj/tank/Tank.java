@@ -23,13 +23,16 @@ public class Tank {
     private boolean living = true;
 
     //生成随机数
-    private Random random;
+    private Random random = new Random();
+
+    private Group group = Group.BAD;
 
 
-    public Tank(int x, int y, Dir dir, TankFrame tf) {
+    public Tank(int x, int y, Dir dir,Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
     }
 
@@ -51,6 +54,14 @@ public class Tank {
 
     public void setMoving(boolean moving) {
         this.moving = moving;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public void paint(Graphics g) {
@@ -109,6 +120,10 @@ public class Tank {
             default:
                 break;
         }
+
+        if(random.nextInt(10) > 8){
+            this.fire();
+        }
     }
 
     public void fire() {
@@ -119,7 +134,7 @@ public class Tank {
         int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
         //使用容器来装多个子弹
-        tf.bullets.add(new Bullet(bX, bY, this.dir,this.tf));
+        tf.bullets.add(new Bullet(bX, bY, this.dir,this.group, this.tf));
     }
 
     //碰撞检测后死亡

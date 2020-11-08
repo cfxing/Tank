@@ -18,11 +18,21 @@ public class Bullet {
 
     //判断子弹是否离开边界
     private boolean living = true;
+    private  Group group = Group.BAD;
 
-    public Bullet(int x, int y, Dir dir,TankFrame tf) {
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf ;
     }
 
@@ -80,6 +90,12 @@ public class Bullet {
     }
 
     public void collideWith(Tank tank) {
+        //开启队友之间不伤害
+        if (this.group == tank.getGroup()) {
+            return;
+        }
+
+        //TODO:用一个rect 来记录子弹的位置
         //Rectangle 为辅助类，矩形
         //获得子弹的矩形
         Rectangle rect1 = new Rectangle(this.x, this.y,WIDTH, HEIGHT);

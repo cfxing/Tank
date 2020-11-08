@@ -17,7 +17,7 @@ import static com.xnj.tank.Dir.*;
  */
 public class TankFrame extends Frame {
 
-    Tank tank = new Tank(200,400,Dir.UP, this);
+    Tank tank = new Tank(200,400,Dir.UP, Group.GOOD, this);
     List<Bullet> bullets = new ArrayList<Bullet>();
 //    Bullet b = new Bullet(300, 300, DOWN);
 
