@@ -10,7 +10,7 @@ import java.awt.event.WindowEvent;
  */
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
+     public static void main(String[] args) throws InterruptedException {
         TankFrame f = new TankFrame();
 
         //初始化敌方坦克

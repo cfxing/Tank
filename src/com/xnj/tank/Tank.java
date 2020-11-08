@@ -1,6 +1,7 @@
 package com.xnj.tank;
 
 import java.awt.*;
+import java.time.Year;
 import java.util.Random;
 
 /**
@@ -10,12 +11,12 @@ import java.util.Random;
 public class Tank {
     private int x, y;
     private Dir dir;
-    private static final int SPEED = 10;
+    private static final int SPEED = 5;
 
-    public static int WIDTH = ResourceMgr.tankD.getWidth();
-    public static int HEIGHT = ResourceMgr.tankD.getHeight();
+    public static int WIDTH = ResourceMgr.goodTankU.getWidth();
+    public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
-    private boolean moving = false;
+    private boolean moving = true;
 
     //持有对象的引用
     private TankFrame tf = null;
@@ -27,6 +28,8 @@ public class Tank {
 
     private Group group = Group.BAD;
 
+    Rectangle rect = new Rectangle();
+
 
     public Tank(int x, int y, Dir dir,Group group, TankFrame tf) {
         this.x = x;
@@ -34,6 +37,11 @@ public class Tank {
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     public Dir getDir() {
@@ -77,16 +85,16 @@ public class Tank {
         //判断方向画图
         switch (dir){
             case UP:
-                g.drawImage(ResourceMgr.tankU,x,y,null);
+                g.drawImage(this.group == Group.GOOD? ResourceMgr.goodTankU : ResourceMgr.badTankU,x,y,null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.tankR,x,y,null);
+                g.drawImage(this.group == Group.GOOD? ResourceMgr.goodTankR : ResourceMgr.badTankR,x,y,null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.tankD,x,y,null);
+                g.drawImage(this.group == Group.GOOD? ResourceMgr.goodTankD : ResourceMgr.badTankD,x,y,null);
                 break;
             case LEFT:
-                g.drawImage(ResourceMgr.tankL,x,y,null);
+                g.drawImage(this.group == Group.GOOD? ResourceMgr.goodTankL : ResourceMgr.badTankL,x,y,null);
                 break;
             default:
                 break;
@@ -121,9 +129,43 @@ public class Tank {
                 break;
         }
 
-        if(random.nextInt(10) > 8){
+
+//        if (this.group == Group.GOOD){
+//            new Thread(() -> new Audio("audio/tank_move.wav").play()).start();
+//        }
+
+        //定义随机发射子弹
+        if(this.group == Group.BAD && random.nextInt(100) > 95){
             this.fire();
         }
+
+        //定义随机改变方向
+        if (this.group == Group.BAD && random.nextInt(100) > 95){
+
+            randomDir();
+        }
+
+        //边界检测
+        boundsCheck();
+
+
+        //更新 rect
+        rect.x = this.x;
+        rect.y = this.y;
+    }
+
+    private void boundsCheck() {
+        if (this.x < 0){ x = 0; }
+        if (this.y < 30){ y = 30; }
+        if (this.x > TankFrame.GAME_WIDTH - Tank.WIDTH - 2 ){ x = TankFrame.GAME_WIDTH - Tank.WIDTH -2 ; }
+        if (this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2 ){ y = TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2; }
+    }
+
+    private void randomDir() {
+        //产生4以内的随机数
+
+        //Dir.values(): 返回一个数组，数组内存的是它的值，用4以内的下标来对于不同的方向
+        this.dir = Dir.values()[random.nextInt(4)];
     }
 
     public void fire() {
@@ -135,6 +177,11 @@ public class Tank {
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
         //使用容器来装多个子弹
         tf.bullets.add(new Bullet(bX, bY, this.dir,this.group, this.tf));
+
+        //声音
+        if (this.group == Group.GOOD){
+            new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
+        }
     }
 
     //碰撞检测后死亡

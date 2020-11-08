@@ -23,6 +23,12 @@ public class TankFrame extends Frame {
 
     List<Tank> tanks = new ArrayList<Tank>();
 
+    //画爆炸
+//    Explode e = new Explode(100, 100, this);
+
+    //爆炸集合
+    List<Explode> explodes = new ArrayList<>();
+
     //将游戏界面抽话出来
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 
@@ -81,6 +87,7 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("子弹的数量" + bullets.size(), 10, 60);
         g.drawString("敌人的数量" + tanks.size(), 10, 80);
+        g.drawString("爆炸的数量" + explodes.size(), 10, 100);
 
         //恢复原来的颜色
         g.setColor(c);
@@ -111,6 +118,13 @@ public class TankFrame extends Frame {
             }
         }
 
+        //画爆炸
+//        e.paint(g);
+
+        //爆炸集合
+        for (int i = 0; i < explodes.size(); i++) {
+            explodes.get(i).paint(g);
+        }
         //删除子弹的另一种代码
 //        for (Iterator<Bullet> it = bullets.iterator(); it.hasNext();){
 //            Bullet b = it.next();
