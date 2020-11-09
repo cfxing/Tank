@@ -19,7 +19,7 @@ public class Main {
             f.tanks.add(new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD,f));
         }
 
-
+        new Thread(() -> new Audio("audio/war1.wav").loop()).start();
         while (true) {
             Thread.sleep(50);
 

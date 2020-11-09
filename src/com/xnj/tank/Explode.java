@@ -22,7 +22,7 @@ public class Explode {
         this.y = y;
         this.tf = tf;
 
-//        new Audio("audio/explode.wav").loop();
+        new Thread(() ->new Audio("audio/explode.wav").loop()).start();
     }
 
     public void paint(Graphics g){
