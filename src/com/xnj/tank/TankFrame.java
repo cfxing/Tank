@@ -1,12 +1,19 @@
 package com.xnj.tank;
 
+import com.xnj.abstractfactory.BaseExplode;
+import com.xnj.abstractfactory.DefaultFactory;
+import com.xnj.abstractfactory.GameFactory;
+import com.xnj.manage.PropertyMgr;
+import com.xnj.strategy.DefaultFireStrategy;
+import com.xnj.strategy.FireStrategy;
+import com.xnj.strategy.FourDirFireStrategy;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import static com.xnj.tank.Dir.*;
@@ -27,8 +34,11 @@ public class TankFrame extends Frame {
 //    Explode e = new Explode(100, 100, this);
 
     //爆炸集合
-    List<Explode> explodes = new ArrayList<>();
+//    List<Explode> explodes = new ArrayList<>();
+    List<BaseExplode> explodes = new ArrayList<>();
 
+    //初始化工厂
+    GameFactory gf = new DefaultFactory();
     //将游戏界面抽话出来
     static final int GAME_WIDTH = PropertyMgr.getInt("gameWidth"), GAME_HEIGHT = PropertyMgr.getInt("gameHeight");
 
@@ -167,7 +177,13 @@ public class TankFrame extends Frame {
                     bD = true;
                     break;
                 case KeyEvent.VK_SPACE:
-                    tank.fire();
+                    if (tanks.size() < 3){
+
+                        tank.fire(FourDirFireStrategy.getInstance());
+                    }else{
+
+                    tank.fire(DefaultFireStrategy.getInstance());
+                    }
                     break;
                 default:
                     break;

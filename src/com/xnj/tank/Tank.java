@@ -1,14 +1,20 @@
 package com.xnj.tank;
 
+import com.xnj.abstractfactory.BaseTank;
+import com.xnj.manage.PropertyMgr;
+import com.xnj.manage.ResourceMgr;
+import com.xnj.strategy.DefaultFireStrategy;
+import com.xnj.strategy.FireStrategy;
+import com.xnj.strategy.FourDirFireStrategy;
+
 import java.awt.*;
-import java.time.Year;
 import java.util.Random;
 
 /**
  * @author chen xuanyi
  * @create 2020-11-05 19:36
  */
-public class Tank {
+public class Tank extends BaseTank {
     private int x, y;
     private Dir dir;
     private static final int SPEED = PropertyMgr.getInt("tankSpeed");
@@ -19,7 +25,7 @@ public class Tank {
     private boolean moving = true;
 
     //持有对象的引用
-    private TankFrame tf = null;
+    public  TankFrame tf = null;
     //判断坦克是否活着
     private boolean living = true;
 
@@ -136,7 +142,14 @@ public class Tank {
 
         //定义随机发射子弹
         if(this.group == Group.BAD && random.nextInt(100) > 95){
-            this.fire();
+//            String badFsName = (String)PropertyMgr.get("badFs");
+//            try {
+//                //全路径名，load到内存
+//                FireStrategy fs = (FireStrategy)Class.forName(badFsName).getDeclaredConstructor().newInstance();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+            this.fire(DefaultFireStrategy.getInstance());
         }
 
         //定义随机改变方向
@@ -168,20 +181,9 @@ public class Tank {
         this.dir = Dir.values()[random.nextInt(4)];
     }
 
-    public void fire() {
-        //持有对方的引用
-//        tf.b = new Bullet(this.x, this.y,this.dir);
-
-        //计算，时子弹在坦克中间
-        int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
-        int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-        //使用容器来装多个子弹
-        tf.bullets.add(new Bullet(bX, bY, this.dir,this.group, this.tf));
-
-        //声音
-        if (this.group == Group.GOOD){
-            new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
-        }
+    //传递一个策略
+    public void fire(FireStrategy fs) {
+        fs.fire(this);
     }
 
     //碰撞检测后死亡

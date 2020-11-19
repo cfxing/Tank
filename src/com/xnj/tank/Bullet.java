@@ -1,12 +1,16 @@
 package com.xnj.tank;
 
+import com.xnj.abstractfactory.BaseBullet;
+import com.xnj.manage.PropertyMgr;
+import com.xnj.manage.ResourceMgr;
+
 import java.awt.*;
 
 /**
  * @author chen xuanyi
  * @create 2020-11-05 20:32
  */
-public class Bullet {
+public class Bullet extends BaseBullet {
     private static final int SPEED = PropertyMgr.getInt("bulletSpeed");
 //    private static int WIDTH = 20, HEIGHT = 20;
     //图片子弹的宽和高
@@ -42,6 +46,9 @@ public class Bullet {
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        //new 出来后直接加到tf中
+        tf.bullets.add(this);
     }
 
     public void paint(Graphics g){
@@ -121,7 +128,9 @@ public class Bullet {
             //写到 die方法也可以
             int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
             int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            tf.explodes.add(new Explode(eX,eY,tf));
+//            tf.explodes.add(new Explode(eX,eY,tf));
+            //使用抽象工厂生产
+            tf.explodes.add(tf.gf.creatExplode(eX, eY, tf));
         }
     }
 

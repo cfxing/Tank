@@ -1,6 +1,9 @@
-#初始坦克有多少个敌方坦克
+#\u4F7F\u7528\u914D\u7F6E\u6587\u4EF6
 initTankCount=10
 tankSpeed=5
 bulletSpeed=15
 gameWidth=1080
 gameHeight=720
+#fire\u7684\u7B56\u7565
+goodFs=com.xnj.strategy.FourDirFireStrategy
+badFs=com.xnj.strategy.DefaultFireStrategy

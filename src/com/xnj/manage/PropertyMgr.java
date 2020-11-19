@@ -1,4 +1,4 @@
-package com.xnj.tank;
+package com.xnj.manage;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -10,7 +10,10 @@ import java.util.Properties;
  * @create 2020-11-08 19:50
  */
 public class PropertyMgr {
-    static Properties props = new Properties();
+
+    private PropertyMgr(){}
+
+    private static Properties props = new Properties();
 
     static{
         try {
@@ -32,8 +35,8 @@ public class PropertyMgr {
         return Integer.parseInt(PropertyMgr.get(key));
     }
 
-    public static void main(String[] args) {
-        System.out.println(PropertyMgr.get("initTankCount"));
-    }
+//    public static void main(String[] args) {
+//        System.out.println(PropertyMgr.get("initTankCount"));
+//    }
 
 }

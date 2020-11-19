@@ -1,5 +1,8 @@
 package com.xnj.tank;
 
+import com.xnj.abstractfactory.BaseExplode;
+import com.xnj.manage.ResourceMgr;
+
 import java.awt.*;
 
 /**
@@ -7,7 +10,7 @@ import java.awt.*;
  * @author chen xuanyi
  * @create 2020-11-08 14:19
  */
-public class Explode {
+public class Explode extends BaseExplode {
     public static int WIDTH = ResourceMgr.explodes[0].getWidth();
     public static int HEIGHT = ResourceMgr.explodes[0].getHeight();
 
@@ -25,6 +28,7 @@ public class Explode {
         new Thread(() ->new Audio("audio/explode.wav").loop()).start();
     }
 
+    @Override
     public void paint(Graphics g){
         g.drawImage(ResourceMgr.explodes[step++], x, y, null);
 

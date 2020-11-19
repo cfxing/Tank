@@ -1,4 +1,6 @@
-package com.xnj.tank;
+package com.xnj.manage;
+
+import com.xnj.tank.ImageUtil;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -15,6 +17,20 @@ public class ResourceMgr {
     public static BufferedImage badTankL, badTankU, badTankR, badTankD;
     public static BufferedImage bulletL, bulletU, bulletR, bulletD;
     public static BufferedImage[] explodes = new BufferedImage[16];
+
+    /**
+     * 实现单例模式，构造器为私有的，创建内部静态类，由于静态内部类RessourceMgrLoader 在 类 ResourceMgr 加载的时候，
+     * 并不会被加载，而是在调用 getInstance（） 时被加载，与饿汉式存在区别
+     */
+    private ResourceMgr() {}
+
+    private static class ResourceMgrLoader {
+        private static final ResourceMgr instance = new ResourceMgr();
+    }
+
+    public static ResourceMgr getInstance(){
+        return ResourceMgrLoader.instance;
+    }
 
     static {
         try {

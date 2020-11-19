@@ -1,8 +1,6 @@
 package com.xnj.tank;
 
-import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import com.xnj.manage.PropertyMgr;
 
 /**
  * @author chen xuanyi
