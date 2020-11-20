@@ -13,14 +13,14 @@ public class Explode {
 
     private int x,y;
 //    private  boolean living = true;
-    TankFrame tf = null;
-
+//    TankFrame tf = null;
+    GameModel gm;
     private int step = 0;
 
-    public Explode(int x, int y, TankFrame tf) {
+    public Explode(int x, int y, GameModel gm) {
         this.x = x;
         this.y = y;
-        this.tf = tf;
+        this.gm = gm;
 
         new Thread(() ->new Audio("audio/explode.wav").loop()).start();
     }
@@ -30,7 +30,7 @@ public class Explode {
 
         if (step >= ResourceMgr.explodes.length){
             //不需要living属性，当爆炸完成后就删除
-            tf.explodes.remove(this);
+            gm.explodes.remove(this);
         }
     }
 }

@@ -29,14 +29,15 @@ public class Tank {
     private Group group = Group.BAD;
 
     Rectangle rect = new Rectangle();
+    GameModel gm;
 
 
-    public Tank(int x, int y, Dir dir,Group group, TankFrame tf) {
+    public Tank(int x, int y, Dir dir,Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
+        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
@@ -79,7 +80,7 @@ public class Tank {
 //        g.setColor(c);
 
         if (!living) {
-            tf.tanks.remove(this);
+            gm.tanks.remove(this);
         }
         //画图片
         //判断方向画图
@@ -176,7 +177,7 @@ public class Tank {
         int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
         //使用容器来装多个子弹
-        tf.bullets.add(new Bullet(bX, bY, this.dir,this.group, this.tf));
+        gm.bullets.add(new Bullet(bX, bY, this.dir,this.group, gm));
 
         //声音
         if (this.group == Group.GOOD){

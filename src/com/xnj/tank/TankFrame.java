@@ -12,22 +12,23 @@ import java.util.List;
 import static com.xnj.tank.Dir.*;
 
 /**
+ *
+ * 要解决添加新物体的物体
+ * 1.Tf Facade （门面） ：
+ * Frame ： 只做展示
+ * GameModel : 内部逻辑计算
+ * 2.GameObject
+ *
+ *
  * @author chen xuanyi
  * @create 2020-11-05 15:26
  */
 public class TankFrame extends Frame {
 
-    Tank tank = new Tank(200,400,Dir.UP, Group.GOOD, this);
-    List<Bullet> bullets = new ArrayList<Bullet>();
-//    Bullet b = new Bullet(300, 300, DOWN);
+    //获得门面
+    GameModel gm = GameModel.getInstance();
 
-    List<Tank> tanks = new ArrayList<Tank>();
 
-    //画爆炸
-//    Explode e = new Explode(100, 100, this);
-
-    //爆炸集合
-    List<Explode> explodes = new ArrayList<>();
 
     //将游戏界面抽话出来
     static final int GAME_WIDTH = PropertyMgr.getInt("gameWidth"), GAME_HEIGHT = PropertyMgr.getInt("gameHeight");
@@ -75,63 +76,10 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-//        System.out.println("print");
-//        g.fillRect(x,y,50,50);
-//        x += 10;
-//        y += 10;
 
-        //修改颜色
-        //保存之前颜色
-        Color c = g.getColor();
-        //修改颜色
-        g.setColor(Color.WHITE);
-        g.drawString("子弹的数量" + bullets.size(), 10, 60);
-        g.drawString("敌人的数量" + tanks.size(), 10, 80);
-        g.drawString("爆炸的数量" + explodes.size(), 10, 100);
+        gm.paint(g);
 
-        //恢复原来的颜色
-        g.setColor(c);
-
-        tank.paint(g);
-
-//        b.paint(g);
-
-        //此方法删除子弹会报错
-//        for (Bullet b: bullets){
-//            b.paint(g);
-//        }
-
-        for (int i = 0; i < bullets.size(); i++){
-            bullets.get(i).paint(g);
-        }
-
-        //画坦克
-        for (int i = 0 ; i < tanks.size(); i++){
-            tanks.get(i).paint(g);
-        }
-
-        //碰撞检测
-        for(int i = 0; i < bullets.size(); i++){
-            for (int j = 0; j < tanks.size(); j++){
-
-                bullets.get(i).collideWith(tanks.get(j));
-            }
-        }
-
-        //画爆炸
-//        e.paint(g);
-
-        //爆炸集合
-        for (int i = 0; i < explodes.size(); i++) {
-            explodes.get(i).paint(g);
-        }
-        //删除子弹的另一种代码
-//        for (Iterator<Bullet> it = bullets.iterator(); it.hasNext();){
-//            Bullet b = it.next();
-//            if (!b.live){
-//                it.remove();
-//            }
-//        }
+    //画法全提到GameModel    中
 
 
     }
@@ -167,7 +115,7 @@ public class TankFrame extends Frame {
                     bD = true;
                     break;
                 case KeyEvent.VK_SPACE:
-                    tank.fire();
+                    gm.getMainTank().fire();
                     break;
                 default:
                     break;
@@ -176,6 +124,8 @@ public class TankFrame extends Frame {
 //            repaint();
 
             setMainTankDir();
+
+            new Thread(() -> new Audio("audio/tank_move.wav").play()).start();
         }
 
         //当一个键被松开
@@ -203,21 +153,21 @@ public class TankFrame extends Frame {
 
         private void setMainTankDir() {
             if (!bL && !bU && !bR && !bD){
-                tank.setMoving(false);
+                gm.getMainTank().setMoving(false);
             }else{
-                tank.setMoving(true);
+                gm.getMainTank().setMoving(true);
 
                 if (bL) {
-                    tank.setDir(LEFT);
+                    gm.getMainTank().setDir(LEFT);
                 }
                 if (bU) {
-                    tank.setDir(UP);
+                    gm.getMainTank().setDir(UP);
                 }
                 if (bR) {
-                    tank.setDir(RIGHT);
+                    gm.getMainTank().setDir(RIGHT);
                 }
                 if (bD) {
-                    tank.setDir(DOWN);
+                    gm.getMainTank().setDir(DOWN);
                 }
             }
         }
