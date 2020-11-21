@@ -6,7 +6,7 @@ import java.awt.*;
  * @author chen xuanyi
  * @create 2020-11-05 20:32
  */
-public class Bullet {
+public class Bullet extends GameObject{
     private static final int SPEED = PropertyMgr.getInt("bulletSpeed");
 //    private static int WIDTH = 20, HEIGHT = 20;
     //图片子弹的宽和高
@@ -15,13 +15,13 @@ public class Bullet {
     private int x, y;
     private Dir dir;
 //    private TankFrame tf = null;
-    private GameModel gm;
+    public GameModel gm;
     //判断子弹是否离开边界
     private boolean living = true;
-    private  Group group = Group.BAD;
+    private  Group group;
 
     //解决碰撞检测时候会new很多Rectangle对象
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
 
     public Group getGroup() {
         return group;
@@ -42,11 +42,12 @@ public class Bullet {
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
     }
 
     public void paint(Graphics g){
         if (!living){
-            gm.bullets.remove(this);
+            gm.remove(this);
         }
 //        Color c = g.getColor();
 //        g.setColor(Color.BLUE);
@@ -101,32 +102,34 @@ public class Bullet {
         }
     }
 
-    public void collideWith(Tank tank) {
-        //开启队友之间不伤害
-        if (this.group == tank.getGroup()) {
-            return;
-        }
+    //碰撞检测在BulletTankCollider中完成
 
-        //TODO:用一个rect 来记录子弹的位置
-        //Rectangle 为辅助类，矩形
-        //获得子弹的矩形
-//        Rectangle rect1 = new Rectangle(this.x, this.y,WIDTH, HEIGHT);
+//    public void collideWith(Tank tank) {
+//        //开启队友之间不伤害
+//        if (this.group == tank.getGroup()) {
+//            return;
+//        }
 //
-//        //坦克的方块
-//        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
-
-        if (rect.intersects(tank.rect)){
-            tank.die();
-            this.die();
-            //写到 die方法也可以
-            int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
-            int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            gm.explodes.add(new Explode(eX,eY,gm));
-        }
-    }
+//        //TODO:用一个rect 来记录子弹的位置
+//        //Rectangle 为辅助类，矩形
+//        //获得子弹的矩形
+////        Rectangle rect1 = new Rectangle(this.x, this.y,WIDTH, HEIGHT);
+////
+////        //坦克的方块
+////        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+//
+//        if (rect.intersects(tank.rect)){
+//            tank.die();
+//            this.die();
+//            //写到 die方法也可以
+//            int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
+//            int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
+//            gm.add(new Explode(eX,eY,gm));
+//        }
+//    }
 
     //碰撞检测后死亡
-    private void die() {
+    public void die() {
         this.living = false;
     }
 }

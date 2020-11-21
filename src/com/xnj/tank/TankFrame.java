@@ -5,9 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+
 
 import static com.xnj.tank.Dir.*;
 
@@ -125,7 +123,7 @@ public class TankFrame extends Frame {
 
             setMainTankDir();
 
-            new Thread(() -> new Audio("audio/tank_move.wav").play()).start();
+//            new Thread(() -> new Audio("audio/tank_move.wav").play()).start();
         }
 
         //当一个键被松开

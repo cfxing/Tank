@@ -7,7 +7,7 @@ import java.awt.*;
  * @author chen xuanyi
  * @create 2020-11-08 14:19
  */
-public class Explode {
+public class Explode extends GameObject{
     public static int WIDTH = ResourceMgr.explodes[0].getWidth();
     public static int HEIGHT = ResourceMgr.explodes[0].getHeight();
 
@@ -30,7 +30,7 @@ public class Explode {
 
         if (step >= ResourceMgr.explodes.length){
             //不需要living属性，当爆炸完成后就删除
-            gm.explodes.remove(this);
+            gm.remove(this);
         }
     }
 }

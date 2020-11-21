@@ -1,5 +1,10 @@
 package com.xnj.tank;
 
+import com.xnj.cor.BulletTankCollider;
+import com.xnj.cor.Collider;
+import com.xnj.cor.ColliderChain;
+import com.xnj.cor.TankTankCollider;
+
 import javax.xml.crypto.KeySelector;
 import java.awt.*;
 import java.util.ArrayList;
@@ -13,11 +18,38 @@ import java.util.List;
  */
 public class GameModel {
 
+    Tank tank = new Tank(200,400,Dir.UP, Group.GOOD, this);
+
+//    java.util.List<Bullet> bullets = new ArrayList<Bullet>();
+////    Bullet b = new Bullet(300, 300, DOWN);
+//
+//    java.util.List<Tank> tanks = new ArrayList<Tank>();
+//
+//    //画爆炸
+////    Explode e = new Explode(100, 100, this);
+//
+//    //爆炸集合
+//    List<Explode> explodes = new ArrayList<>();
+//    Collider collider1 = new BulletTankCollider();
+//    Collider collider2 = new TankTankCollider();
+    ColliderChain colliderChain = new ColliderChain();
+
+    //使用一个物体集合管理物体
+    private List<GameObject> objects = new ArrayList<>();
+
+    public void  add(GameObject go){
+        this.objects.add(go);
+    }
+
+    public void remove(GameObject go){
+        this.objects.remove(go);
+    }
+
     private GameModel(){
         int initTankCount = PropertyMgr.getInt("initTankCount");
         //初始化敌方坦克
         for (int i = 0; i < initTankCount; i++){
-            tanks.add(new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD,this));
+            add(new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD,this));
         }
     }
 
@@ -29,19 +61,6 @@ public class GameModel {
         return GameModelLoder.INSTANCE;
     }
 
-    Tank tank = new Tank(200,400,Dir.UP, Group.GOOD, this);
-    java.util.List<Bullet> bullets = new ArrayList<Bullet>();
-//    Bullet b = new Bullet(300, 300, DOWN);
-
-    java.util.List<Tank> tanks = new ArrayList<Tank>();
-
-    //画爆炸
-//    Explode e = new Explode(100, 100, this);
-
-    //爆炸集合
-    List<Explode> explodes = new ArrayList<>();
-
-
 
     public void paint(Graphics g) {
         //        System.out.println("print");
@@ -51,15 +70,15 @@ public class GameModel {
 
         //修改颜色
         //保存之前颜色
-        Color c = g.getColor();
-        //修改颜色
-        g.setColor(Color.WHITE);
-        g.drawString("子弹的数量" + bullets.size(), 10, 60);
-        g.drawString("敌人的数量" + tanks.size(), 10, 80);
-        g.drawString("爆炸的数量" + explodes.size(), 10, 100);
-
-        //恢复原来的颜色
-        g.setColor(c);
+//        Color c = g.getColor();
+//        //修改颜色
+//        g.setColor(Color.WHITE);
+//        g.drawString("子弹的数量" + bullets.size(), 10, 60);
+//        g.drawString("敌人的数量" + tanks.size(), 10, 80);
+//        g.drawString("爆炸的数量" + explodes.size(), 10, 100);
+//
+//        //恢复原来的颜色
+//        g.setColor(c);
 
         tank.paint(g);
 
@@ -70,30 +89,41 @@ public class GameModel {
 //            b.paint(g);
 //        }
 
-        for (int i = 0; i < bullets.size(); i++){
-            bullets.get(i).paint(g);
+        for (int i = 0; i < objects.size(); i++){
+            objects.get(i).paint(g);
+        }
+
+        //碰撞检测，互相碰撞
+        for (int i = 0; i < objects.size(); i++) {
+            for (int j = i+1; j < objects.size(); j++) {
+                GameObject o1 = objects.get(i);
+                GameObject o2 = objects.get(j);
+//                collider1.collide(o1, o2);
+//                collider2.collide(o1,o2);
+                colliderChain.collide(o1, o2);
+            }
         }
 
         //画坦克
-        for (int i = 0 ; i < tanks.size(); i++){
-            tanks.get(i).paint(g);
-        }
+//        for (int i = 0 ; i < tanks.size(); i++){
+//            tanks.get(i).paint(g);
+//        }
 
         //碰撞检测
-        for(int i = 0; i < bullets.size(); i++){
-            for (int j = 0; j < tanks.size(); j++){
-
-                bullets.get(i).collideWith(tanks.get(j));
-            }
-        }
+//        for(int i = 0; i < bullets.size(); i++){
+//            for (int j = 0; j < tanks.size(); j++){
+//
+//                bullets.get(i).collideWith(tanks.get(j));
+//            }
+//        }
 
         //画爆炸
 //        e.paint(g);
 
         //爆炸集合
-        for (int i = 0; i < explodes.size(); i++) {
-            explodes.get(i).paint(g);
-        }
+//        for (int i = 0; i < explodes.size(); i++) {
+//            explodes.get(i).paint(g);
+//        }
         //删除子弹的另一种代码
 //        for (Iterator<Bullet> it = bullets.iterator(); it.hasNext();){
 //            Bullet b = it.next();

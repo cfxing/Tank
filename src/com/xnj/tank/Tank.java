@@ -8,7 +8,7 @@ import java.util.Random;
  * @author chen xuanyi
  * @create 2020-11-05 19:36
  */
-public class Tank {
+public class Tank extends GameObject{
     private int x, y;
     private Dir dir;
     private static final int SPEED = PropertyMgr.getInt("tankSpeed");
@@ -19,7 +19,7 @@ public class Tank {
     private boolean moving = true;
 
     //持有对象的引用
-    private TankFrame tf = null;
+//    private TankFrame tf = null;
     //判断坦克是否活着
     private boolean living = true;
 
@@ -28,8 +28,12 @@ public class Tank {
 
     private Group group = Group.BAD;
 
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
     GameModel gm;
+
+    //用于记录前一个位置
+    public int prevX;
+    public int prevY;
 
 
     public Tank(int x, int y, Dir dir,Group group, GameModel gm) {
@@ -52,10 +56,12 @@ public class Tank {
     public int getX() {
         return x;
     }
+    public void setX(int x){ this.x = x;}
 
     public int getY() {
         return y;
     }
+    public void setY(int y){ this.y = y;}
 
     public void setDir(Dir dir) {
         this.dir = dir;
@@ -79,8 +85,10 @@ public class Tank {
 //        g.fillRect(x,y,50,50);
 //        g.setColor(c);
 
+        prevX = x;
+        prevY = y;
         if (!living) {
-            gm.tanks.remove(this);
+            gm.remove(this);
         }
         //画图片
         //判断方向画图
@@ -177,12 +185,16 @@ public class Tank {
         int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
         //使用容器来装多个子弹
-        gm.bullets.add(new Bullet(bX, bY, this.dir,this.group, gm));
+        gm.add(new Bullet(bX, bY, this.dir,this.group, gm));
 
         //声音
-        if (this.group == Group.GOOD){
-            new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
-        }
+//        if (this.group == Group.GOOD){
+//            new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
+//        }
+    }
+
+    public void stop(){
+        moving = false;
     }
 
     //碰撞检测后死亡
