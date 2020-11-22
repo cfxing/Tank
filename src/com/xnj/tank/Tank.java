@@ -29,24 +29,25 @@ public class Tank extends GameObject{
     private Group group = Group.BAD;
 
     public Rectangle rect = new Rectangle();
-    GameModel gm;
+//    GameModel gm;
 
     //用于记录前一个位置
     public int prevX;
     public int prevY;
 
 
-    public Tank(int x, int y, Dir dir,Group group, GameModel gm) {
+    public Tank(int x, int y, Dir dir,Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        GameModel.getInstance().add(this);
     }
 
     public Dir getDir() {
@@ -84,11 +85,8 @@ public class Tank extends GameObject{
 //        g.setColor(Color.YELLOW);
 //        g.fillRect(x,y,50,50);
 //        g.setColor(c);
-
-        prevX = x;
-        prevY = y;
         if (!living) {
-            gm.remove(this);
+            GameModel.getInstance().remove(this);
         }
         //画图片
         //判断方向画图
@@ -118,6 +116,9 @@ public class Tank extends GameObject{
     }
 
     private void move() {
+        prevX = x;
+        prevY = y;
+
         if (!moving){
             return;
         }
@@ -163,6 +164,11 @@ public class Tank extends GameObject{
         rect.y = this.y;
     }
 
+    public void back() {
+        x = prevX;
+        y = prevY;
+    }
+
     private void boundsCheck() {
         if (this.x < 0){ x = 0; }
         if (this.y < 30){ y = 30; }
@@ -185,7 +191,7 @@ public class Tank extends GameObject{
         int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
         //使用容器来装多个子弹
-        gm.add(new Bullet(bX, bY, this.dir,this.group, gm));
+        GameModel.getInstance().add(new Bullet(bX, bY, this.dir,this.group));
 
         //声音
 //        if (this.group == Group.GOOD){

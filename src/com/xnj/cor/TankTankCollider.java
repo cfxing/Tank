@@ -20,10 +20,8 @@ public class TankTankCollider implements Collider {
             //队友不伤害
 
             if (t1.rect.intersects(t2.rect)){
-                t1.setX(t1.prevX);
-                t1.setY(t1.prevY);
-                t2.setX(t2.prevX);
-                t2.setY(t2.prevY);
+                t1.back();
+                t2.back();
             }
         }
         return true;

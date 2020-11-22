@@ -18,7 +18,12 @@ import java.util.List;
  */
 public class GameModel {
 
-    Tank tank = new Tank(200,400,Dir.UP, Group.GOOD, this);
+    //在init（）中初始化
+    Tank tank;
+
+    static {
+        getInstance().init();
+    }
 
 //    java.util.List<Bullet> bullets = new ArrayList<Bullet>();
 ////    Bullet b = new Bullet(300, 300, DOWN);
@@ -37,6 +42,23 @@ public class GameModel {
     //使用一个物体集合管理物体
     private List<GameObject> objects = new ArrayList<>();
 
+    private void init() {
+
+        tank = new Tank(200,400,Dir.UP, Group.GOOD);
+
+        int initTankCount = PropertyMgr.getInt("initTankCount");
+        //初始化敌方坦克
+        for (int i = 0; i < initTankCount; i++){
+            new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD);
+        }
+
+        //初始化墙
+        add(new Wall(150,150,200,50));
+        add(new Wall(500,150,200,50));
+        add(new Wall(300,300,50, 200));
+        add(new Wall(550,300,50,200));
+    }
+
     public void  add(GameObject go){
         this.objects.add(go);
     }
@@ -46,17 +68,10 @@ public class GameModel {
     }
 
     private GameModel(){
-        int initTankCount = PropertyMgr.getInt("initTankCount");
-        //初始化敌方坦克
-        for (int i = 0; i < initTankCount; i++){
-            add(new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD,this));
-        }
     }
-
     private static class GameModelLoder{
         private static final GameModel INSTANCE = new GameModel();
     }
-
     public static GameModel getInstance(){
         return GameModelLoder.INSTANCE;
     }

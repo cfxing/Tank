@@ -14,15 +14,16 @@ public class Explode extends GameObject{
     private int x,y;
 //    private  boolean living = true;
 //    TankFrame tf = null;
-    GameModel gm;
+//    GameModel gm;
     private int step = 0;
 
-    public Explode(int x, int y, GameModel gm) {
+    public Explode(int x, int y) {
         this.x = x;
         this.y = y;
-        this.gm = gm;
 
-        new Thread(() ->new Audio("audio/explode.wav").loop()).start();
+//        new Thread(() ->new Audio("audio/explode.wav").loop()).start();
+
+        GameModel.getInstance().add(this);
     }
 
     public void paint(Graphics g){
@@ -30,7 +31,7 @@ public class Explode extends GameObject{
 
         if (step >= ResourceMgr.explodes.length){
             //不需要living属性，当爆炸完成后就删除
-            gm.remove(this);
+            GameModel.getInstance().remove(this);
         }
     }
 }

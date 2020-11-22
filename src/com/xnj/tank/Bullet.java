@@ -15,7 +15,7 @@ public class Bullet extends GameObject{
     private int x, y;
     private Dir dir;
 //    private TankFrame tf = null;
-    public GameModel gm;
+//    public GameModel gm;
     //判断子弹是否离开边界
     private boolean living = true;
     private  Group group;
@@ -31,23 +31,23 @@ public class Bullet extends GameObject{
         this.group = group;
     }
 
-    public Bullet(int x, int y, Dir dir, Group group,GameModel gm) {
+    public Bullet(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm ;
+        //单例的gm， 不需要传参
+//        this.gm = gm ;
 
         rect.x = this.x;
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
-
     }
 
     public void paint(Graphics g){
         if (!living){
-            gm.remove(this);
+            GameModel.getInstance().remove(this);
         }
 //        Color c = g.getColor();
 //        g.setColor(Color.BLUE);
