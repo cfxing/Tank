@@ -2,9 +2,14 @@ package com.xnj.tank;
 
 import com.xnj.decorator.RectDecorator;
 import com.xnj.decorator.TailDecorator;
+import com.xnj.observer.TankFireEvent;
+import com.xnj.observer.TankFireHandler;
+import com.xnj.observer.TankFireObserver;
 
 import java.awt.*;
 import java.time.Year;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -204,15 +209,24 @@ public class Tank extends GameObject{
         int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
         //使用容器来装多个子弹
-        GameModel.getInstance().add(
-                new RectDecorator(
-                        new TailDecorator(
-                                new Bullet(bX, bY, this.dir,this.group))));
+//        GameModel.getInstance().add(
+//                new RectDecorator(
+//                        new TailDecorator(
+//                                new Bullet(bX, bY, this.dir,this.group))));
+        GameModel.getInstance().add(new Bullet(bX, bY, this.dir, this.getGroup()));
 
         //声音
 //        if (this.group == Group.GOOD){
 //            new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
 //        }
+    }
+
+    List<TankFireObserver> fireObservers = Arrays.asList(new TankFireHandler());
+    public void handleFireKey() {
+        TankFireEvent event = new TankFireEvent(this);
+        for (TankFireObserver o : fireObservers) {
+            o.actionOnFire(event);
+        }
     }
 
     public void stop(){
