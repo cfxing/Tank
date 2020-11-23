@@ -1,5 +1,8 @@
 package com.xnj.tank;
 
+import com.xnj.decorator.RectDecorator;
+import com.xnj.decorator.TailDecorator;
+
 import java.awt.*;
 import java.time.Year;
 import java.util.Random;
@@ -9,7 +12,7 @@ import java.util.Random;
  * @create 2020-11-05 19:36
  */
 public class Tank extends GameObject{
-    private int x, y;
+//    private int x, y;
     private Dir dir;
     private static final int SPEED = PropertyMgr.getInt("tankSpeed");
 
@@ -115,6 +118,16 @@ public class Tank extends GameObject{
 
     }
 
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
+    }
+
     private void move() {
         prevX = x;
         prevY = y;
@@ -191,7 +204,10 @@ public class Tank extends GameObject{
         int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
         //使用容器来装多个子弹
-        GameModel.getInstance().add(new Bullet(bX, bY, this.dir,this.group));
+        GameModel.getInstance().add(
+                new RectDecorator(
+                        new TailDecorator(
+                                new Bullet(bX, bY, this.dir,this.group))));
 
         //声音
 //        if (this.group == Group.GOOD){

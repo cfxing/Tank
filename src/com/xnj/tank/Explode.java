@@ -11,7 +11,7 @@ public class Explode extends GameObject{
     public static int WIDTH = ResourceMgr.explodes[0].getWidth();
     public static int HEIGHT = ResourceMgr.explodes[0].getHeight();
 
-    private int x,y;
+//    private int x,y;
 //    private  boolean living = true;
 //    TankFrame tf = null;
 //    GameModel gm;
@@ -33,5 +33,15 @@ public class Explode extends GameObject{
             //不需要living属性，当爆炸完成后就删除
             GameModel.getInstance().remove(this);
         }
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 }
