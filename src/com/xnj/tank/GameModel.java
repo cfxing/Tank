@@ -7,16 +7,18 @@ import com.xnj.cor.TankTankCollider;
 
 import javax.xml.crypto.KeySelector;
 import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 门面模型 Facade
  * 应该为单例
+ * Serializable: 实现序列化
  * @author chen xuanyi
  * @create 2020-11-20 14:58
  */
-public class GameModel {
+public class GameModel{
 
     //在init（）中初始化
     Tank tank;
@@ -69,6 +71,7 @@ public class GameModel {
 
     private GameModel(){
     }
+
     private static class GameModelLoder{
         private static final GameModel INSTANCE = new GameModel();
     }
@@ -150,6 +153,48 @@ public class GameModel {
 
     public Tank getMainTank() {
         return tank;
+    }
+
+    public void save() {
+        File f = new File("C:\\Users\\19453\\Desktop\\IT_book\\tank.data");
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(new FileOutputStream(f));
+            oos.writeObject(tank);
+            oos.writeObject(objects);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (oos != null){
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void load() {
+        File f = new File("C:\\Users\\19453\\Desktop\\IT_book\\tank.data");
+        ObjectInputStream ois = null;
+        try {
+            ois = new ObjectInputStream(new FileInputStream(f));
+            tank = (Tank)ois.readObject();
+            objects = (List)ois.readObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }finally {
+            if (ois != null) {
+                try {
+                    ois.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 }
