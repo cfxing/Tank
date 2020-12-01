@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import static com.xnj.tank.Dir.*;
 
@@ -17,7 +18,8 @@ import static com.xnj.tank.Dir.*;
  */
 public class TankFrame extends Frame {
 
-    Tank tank = new Tank(200,400,Dir.UP, Group.GOOD, this);
+    Random r = new Random();
+    Tank tank = new Tank(r.nextInt(GAME_WIDTH),r.nextInt(GAME_HEIGHT),Dir.UP, Group.GOOD, this);
     List<Bullet> bullets = new ArrayList<Bullet>();
 //    Bullet b = new Bullet(300, 300, DOWN);
 
@@ -33,7 +35,7 @@ public class TankFrame extends Frame {
     static final int GAME_WIDTH = PropertyMgr.getInt("gameWidth"), GAME_HEIGHT = PropertyMgr.getInt("gameHeight");
 
 
-    public TankFrame() throws HeadlessException {
+    private TankFrame() throws HeadlessException {
         //设置窗口大小
         this.setSize(GAME_WIDTH, GAME_HEIGHT);
         //设置窗口是否可以随便改变大小
@@ -41,7 +43,7 @@ public class TankFrame extends Frame {
         //设置标题
         this.setTitle("tank war");
         //设置窗口可见
-        this.setVisible(true);
+//        this.setVisible(true);
 
         this.addKeyListener(new MyKeyListener());
 
@@ -53,6 +55,14 @@ public class TankFrame extends Frame {
                 System.exit(0);
             }
         });
+    }
+
+    private static class TankFrameLoader {
+        private static final TankFrame INSTANCE = new TankFrame();
+    }
+
+    public static TankFrame getInstance() {
+        return TankFrameLoader.INSTANCE;
     }
 
     //使用双缓冲解决闪烁问题
@@ -222,5 +232,9 @@ public class TankFrame extends Frame {
             }
         }
 
+    }
+
+    public Tank getMainTank() {
+        return tank;
     }
 }

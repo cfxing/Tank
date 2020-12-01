@@ -3,6 +3,7 @@ package com.xnj.tank;
 import java.awt.*;
 import java.time.Year;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * @author chen xuanyi
@@ -30,6 +31,8 @@ public class Tank {
 
     Rectangle rect = new Rectangle();
 
+    UUID id = UUID.randomUUID();
+
 
     public Tank(int x, int y, Dir dir,Group group, TankFrame tf) {
         this.x = x;
@@ -54,6 +57,14 @@ public class Tank {
 
     public int getY() {
         return y;
+    }
+
+    public Boolean isMoving() {
+        return moving;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public void setDir(Dir dir) {
@@ -81,6 +92,11 @@ public class Tank {
         if (!living) {
             tf.tanks.remove(this);
         }
+
+        Color c = g.getColor();
+        g.setColor(Color.YELLOW);
+        g.drawString(id.toString(),x,y - 10);
+        g.setColor(c);
         //画图片
         //判断方向画图
         switch (dir){
