@@ -5,10 +5,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
 import static com.xnj.tank.Dir.*;
 
@@ -23,7 +21,8 @@ public class TankFrame extends Frame {
     List<Bullet> bullets = new ArrayList<Bullet>();
 //    Bullet b = new Bullet(300, 300, DOWN);
 
-    List<Tank> tanks = new ArrayList<Tank>();
+//    List<Tank> tanks = new ArrayList<Tank>();
+    Map<UUID, Tank> tanks = new HashMap<>();
 
     //画爆炸
 //    Explode e = new Explode(100, 100, this);
@@ -55,6 +54,14 @@ public class TankFrame extends Frame {
                 System.exit(0);
             }
         });
+    }
+
+    public Tank findUUID(UUID id) {
+        return tanks.get(id);
+    }
+
+    public void addTank(Tank t) {
+        tanks.put(t.getId(), t);
     }
 
     private static class TankFrameLoader {
@@ -116,9 +123,11 @@ public class TankFrame extends Frame {
         }
 
         //画坦克
-        for (int i = 0 ; i < tanks.size(); i++){
-            tanks.get(i).paint(g);
-        }
+//        for (int i = 0 ; i < tanks.size(); i++){
+//            tanks.get(i).paint(g);
+//        }
+        //java9 Stream API
+        tanks.values().stream().forEach( (e) -> e.paint(g));
 
         //碰撞检测
         for(int i = 0; i < bullets.size(); i++){

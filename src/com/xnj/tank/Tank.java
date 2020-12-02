@@ -1,5 +1,7 @@
 package com.xnj.tank;
 
+import com.xnj.tank.net.TankJoinMsg;
+
 import java.awt.*;
 import java.time.Year;
 import java.util.Random;
@@ -45,6 +47,15 @@ public class Tank {
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+    }
+
+    public Tank(TankJoinMsg msg) {
+        this.x = msg.x;
+        this.y = msg.y;
+        this.dir = msg.dir;
+        this.moving = msg.moving;
+        this.group = msg.group;
+        this.id = msg.id;
     }
 
     public Dir getDir() {

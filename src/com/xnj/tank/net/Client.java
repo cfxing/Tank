@@ -1,5 +1,6 @@
 package com.xnj.tank.net;
 
+import com.xnj.tank.Tank;
 import com.xnj.tank.TankFrame;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
@@ -16,6 +17,15 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 public class Client {
     //保存 channel，一个客户端连接到服务器，存在一个channel
     private Channel channel = null;
+
+    private Client() {
+    }
+    private static class ClientLoader {
+        private static final Client INSTANCE = new Client();
+    }
+    public static Client getInstance() {
+        return ClientLoader.INSTANCE;
+    }
 
     public  void connect() {
         EventLoopGroup group = new NioEventLoopGroup(2);
@@ -60,6 +70,11 @@ public class Client {
         channel.writeAndFlush(buf);
     }
 
+    public void send(TankJoinMsg msg){
+        ByteBuf buf = Unpooled.copiedBuffer(msg.toBytes());
+        channel.writeAndFlush(buf);
+    }
+
     public void closeConnect() {
         this.send("_bye_");
         //channel.close();
@@ -93,8 +108,7 @@ public class Client {
 class ClientHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, TankJoinMsg tankJoinMsg) throws Exception {
-
-        System.out.println(tankJoinMsg);
+        tankJoinMsg.handle();
     }
 
     @Override

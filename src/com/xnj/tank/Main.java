@@ -38,8 +38,9 @@ public class Main {
              }
          }).start();
 
-         Client c = new Client();
-         c.connect();
+//         Client c = new Client();
+//         c.connect();
+         Client.getInstance().connect();
 
      }
 
