@@ -1,4 +1,9 @@
-package com.xnj.tank;
+package com.xnj.tank.element;
+
+import com.xnj.tank.GameModel;
+import com.xnj.tank.GameObject;
+import com.xnj.tank.ResourceMgr;
+import com.xnj.tank.TankFrame;
 
 import java.awt.*;
 
@@ -7,22 +12,18 @@ import java.awt.*;
  * @author chen xuanyi
  * @create 2020-11-08 14:19
  */
-public class Explode {
+public class Explode extends GameObject {
     public static int WIDTH = ResourceMgr.explodes[0].getWidth();
     public static int HEIGHT = ResourceMgr.explodes[0].getHeight();
 
     private int x,y;
-//    private  boolean living = true;
-    TankFrame tf = null;
 
     private int step = 0;
 
-    public Explode(int x, int y, TankFrame tf) {
+    public Explode(int x, int y) {
         this.x = x;
         this.y = y;
-        this.tf = tf;
 
-//        new Audio("audio/explode.wav").loop();
     }
 
     public void paint(Graphics g){
@@ -30,7 +31,7 @@ public class Explode {
 
         if (step >= ResourceMgr.explodes.length){
             //不需要living属性，当爆炸完成后就删除
-            tf.explodes.remove(this);
+            GameModel.getInstance().remove(this);
         }
     }
 }

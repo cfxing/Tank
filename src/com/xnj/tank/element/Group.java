@@ -1,4 +1,4 @@
-package com.xnj.tank;
+package com.xnj.tank.element;
 
 /**
  * 区分坦克和子弹的好坏

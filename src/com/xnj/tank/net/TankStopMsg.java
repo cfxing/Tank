@@ -1,6 +1,7 @@
 package com.xnj.tank.net;
 
-import com.xnj.tank.Tank;
+import com.xnj.tank.GameModel;
+import com.xnj.tank.element.Tank;
 import com.xnj.tank.TankFrame;
 
 import java.io.*;
@@ -33,12 +34,12 @@ public class TankStopMsg extends Msg{
     @Override
     public void handle() {
         //说明是自己
-        if (this.id.equals(TankFrame.getInstance().getMainTank().getId())){
+        if (this.id.equals(GameModel.getInstance().getMainTank().getId())){
             return;//不处理
         }
 
         //找到坦克
-        Tank t = TankFrame.getInstance().findUUID(this.id);
+        Tank t = GameModel.getInstance().findUUID(this.id);
 
         //说明找到
         if (t != null) {
@@ -48,6 +49,15 @@ public class TankStopMsg extends Msg{
         }
 
 
+    }
+
+    @Override
+    public String toString() {
+        return "TankStopMsg{" +
+                "id=" + id +
+                ", x=" + x +
+                ", y=" + y +
+                '}';
     }
 
     @Override

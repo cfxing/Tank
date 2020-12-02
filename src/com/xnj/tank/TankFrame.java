@@ -1,5 +1,6 @@
 package com.xnj.tank;
 
+import com.xnj.tank.element.Tank;
 import com.xnj.tank.net.Client;
 import com.xnj.tank.net.TankStartMovingMsg;
 import com.xnj.tank.net.TankStopMsg;
@@ -10,9 +11,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.*;
-import java.util.List;
 
-import static com.xnj.tank.Dir.*;
+import static com.xnj.tank.element.Dir.*;
 
 /**
  * @author chen xuanyi
@@ -20,22 +20,10 @@ import static com.xnj.tank.Dir.*;
  */
 public class TankFrame extends Frame {
 
-    Random r = new Random();
-    Tank tank = new Tank(r.nextInt(GAME_WIDTH),r.nextInt(GAME_HEIGHT),Dir.UP, Group.GOOD, this);
-    List<Bullet> bullets = new ArrayList<Bullet>();
-//    Bullet b = new Bullet(300, 300, DOWN);
-
-//    List<Tank> tanks = new ArrayList<Tank>();
-    Map<UUID, Tank> tanks = new HashMap<>();
-
-    //画爆炸
-//    Explode e = new Explode(100, 100, this);
-
-    //爆炸集合
-    List<Explode> explodes = new ArrayList<>();
+    GameModel gm = GameModel.getInstance();
 
     //将游戏界面抽话出来
-    static final int GAME_WIDTH = PropertyMgr.getInt("gameWidth"), GAME_HEIGHT = PropertyMgr.getInt("gameHeight");
+    public static final int GAME_WIDTH = PropertyMgr.getInt("gameWidth"), GAME_HEIGHT = PropertyMgr.getInt("gameHeight");
 
 
     private TankFrame() throws HeadlessException {
@@ -60,13 +48,6 @@ public class TankFrame extends Frame {
         });
     }
 
-    public Tank findUUID(UUID id) {
-        return tanks.get(id);
-    }
-
-    public void addTank(Tank t) {
-        tanks.put(t.getId(), t);
-    }
 
     private static class TankFrameLoader {
         private static final TankFrame INSTANCE = new TankFrame();
@@ -78,9 +59,10 @@ public class TankFrame extends Frame {
 
     //使用双缓冲解决闪烁问题
     Image offScreenImage = null;
+
     @Override
-    public void update(Graphics g){
-        if (offScreenImage == null){
+    public void update(Graphics g) {
+        if (offScreenImage == null) {
             offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
         }
         Graphics gOffScreen = offScreenImage.getGraphics();
@@ -96,67 +78,7 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-//        System.out.println("print");
-//        g.fillRect(x,y,50,50);
-//        x += 10;
-//        y += 10;
-
-        //修改颜色
-        //保存之前颜色
-        Color c = g.getColor();
-        //修改颜色
-        g.setColor(Color.WHITE);
-        g.drawString("子弹的数量" + bullets.size(), 10, 60);
-        g.drawString("敌人的数量" + tanks.size(), 10, 80);
-        g.drawString("爆炸的数量" + explodes.size(), 10, 100);
-
-        //恢复原来的颜色
-        g.setColor(c);
-
-        tank.paint(g);
-
-//        b.paint(g);
-
-        //此方法删除子弹会报错
-//        for (Bullet b: bullets){
-//            b.paint(g);
-//        }
-
-        for (int i = 0; i < bullets.size(); i++){
-            bullets.get(i).paint(g);
-        }
-
-        //画坦克
-//        for (int i = 0 ; i < tanks.size(); i++){
-//            tanks.get(i).paint(g);
-//        }
-        //java9 Stream API
-        tanks.values().stream().forEach( (e) -> e.paint(g));
-
-        //碰撞检测
-        for(int i = 0; i < bullets.size(); i++){
-            for (int j = 0; j < tanks.size(); j++){
-
-                bullets.get(i).collideWith(tanks.get(j));
-            }
-        }
-
-        //画爆炸
-//        e.paint(g);
-
-        //爆炸集合
-        for (int i = 0; i < explodes.size(); i++) {
-            explodes.get(i).paint(g);
-        }
-        //删除子弹的另一种代码
-//        for (Iterator<Bullet> it = bullets.iterator(); it.hasNext();){
-//            Bullet b = it.next();
-//            if (!b.live){
-//                it.remove();
-//            }
-//        }
-
-
+        gm.paint(g);
     }
 
     class MyKeyListener extends KeyAdapter {
@@ -172,7 +94,7 @@ public class TankFrame extends Frame {
         @Override
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
-            switch (key){
+            switch (key) {
                 case KeyEvent.VK_LEFT:
 //                    x -= 10;
                     bL = true;
@@ -190,7 +112,7 @@ public class TankFrame extends Frame {
                     bD = true;
                     break;
                 case KeyEvent.VK_SPACE:
-                    tank.fire();
+                    gm.getMainTank().fire();
                     break;
                 default:
                     break;
@@ -205,7 +127,7 @@ public class TankFrame extends Frame {
         @Override
         public void keyReleased(KeyEvent e) {
             int key = e.getKeyCode();
-            switch (key){
+            switch (key) {
                 case KeyEvent.VK_LEFT:
                     bL = false;
                     break;
@@ -225,34 +147,31 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
-            if (!bL && !bU && !bR && !bD){
-                tank.setMoving(false);
-                Client.getInstance().send(new TankStopMsg(getMainTank()));
-            }else{
+            if (!bL && !bU && !bR && !bD) {
+                gm.getMainTank().setMoving(false);
+                Client.getInstance().send(new TankStopMsg(gm.getMainTank()));
+            } else {
                 if (bL) {
-                    tank.setDir(LEFT);
+                    gm.getMainTank().setDir(LEFT);
                 }
                 if (bU) {
-                    tank.setDir(UP);
+                    gm.getMainTank().setDir(UP);
                 }
                 if (bR) {
-                    tank.setDir(RIGHT);
+                    gm.getMainTank().setDir(RIGHT);
                 }
                 if (bD) {
-                    tank.setDir(DOWN);
+                    gm.getMainTank().setDir(DOWN);
                 }
-                if (!tank.isMoving()){
+                if (!gm.getMainTank().isMoving()) {
 
-                    Client.getInstance().send(new TankStartMovingMsg(getMainTank()));
+                    Client.getInstance().send(new TankStartMovingMsg(gm.getMainTank()));
                 }
-                tank.setMoving(true);
+                gm.getMainTank().setMoving(true);
 
             }
         }
 
     }
 
-    public Tank getMainTank() {
-        return tank;
-    }
 }

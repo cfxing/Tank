@@ -1,8 +1,8 @@
 package test;
 
 
-import com.xnj.tank.Dir;
-import com.xnj.tank.Group;
+import com.xnj.tank.element.Dir;
+import com.xnj.tank.element.Group;
 import com.xnj.tank.net.TankJoinMsg;
 import com.xnj.tank.net.MsgDecoder;
 import com.xnj.tank.net.MsgEncoder;

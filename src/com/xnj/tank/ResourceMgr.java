@@ -15,6 +15,7 @@ public class ResourceMgr {
     public static BufferedImage badTankL, badTankU, badTankR, badTankD;
     public static BufferedImage bulletL, bulletU, bulletR, bulletD;
     public static BufferedImage[] explodes = new BufferedImage[16];
+    public static BufferedImage[] walls = new BufferedImage[7];
 
     static {
         try {
@@ -43,6 +44,10 @@ public class ResourceMgr {
             //爆炸图片
             for (int i = 0; i < 16; i++){
                 explodes[i] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e" + (i+1) + ".gif"));
+            }
+
+            for (int i = 0; i < 7; i++) {
+                walls[i] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/square" + i + ".jpg"));
             }
 
         } catch (IOException e) {

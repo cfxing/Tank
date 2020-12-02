@@ -1,9 +1,9 @@
-package com.xnj.tank;
+package com.xnj.tank.element;
 
+import com.xnj.tank.*;
 import com.xnj.tank.net.TankJoinMsg;
 
 import java.awt.*;
-import java.time.Year;
 import java.util.Random;
 import java.util.UUID;
 
@@ -11,8 +11,9 @@ import java.util.UUID;
  * @author chen xuanyi
  * @create 2020-11-05 19:36
  */
-public class Tank {
+public class Tank extends GameObject {
     private int x, y;
+    private int oldX, oldY;
     private Dir dir;
     private static final int SPEED = PropertyMgr.getInt("tankSpeed");
 
@@ -21,8 +22,6 @@ public class Tank {
 
     private boolean moving = true;
 
-    //持有对象的引用
-    private TankFrame tf = null;
     //判断坦克是否活着
     private boolean living = true;
 
@@ -31,17 +30,16 @@ public class Tank {
 
     private Group group = Group.BAD;
 
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
 
     UUID id = UUID.randomUUID();
 
 
-    public Tank(int x, int y, Dir dir,Group group, TankFrame tf) {
+    public Tank(int x, int y, Dir dir,Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
 
         rect.x = this.x;
         rect.y = this.y;
@@ -102,13 +100,15 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+        oldX = x;
+        oldY = y;
 //        Color c = g.getColor();
 //        g.setColor(Color.YELLOW);
 //        g.fillRect(x,y,50,50);
 //        g.setColor(c);
 
         if (!living) {
-            tf.tanks.remove(this);
+            GameModel.getInstance().remove(this);
         }
 
         Color c = g.getColor();
@@ -210,7 +210,7 @@ public class Tank {
         int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
         //使用容器来装多个子弹
-        tf.bullets.add(new Bullet(bX, bY, this.dir,this.group, this.tf));
+        GameModel.getInstance().add(new Bullet(bX, bY, this.dir,this.group));
 
         //声音
         if (this.group == Group.GOOD){
@@ -221,5 +221,11 @@ public class Tank {
     //碰撞检测后死亡
     public void die() {
         this.living = false;
+    }
+
+
+    public void back() {
+        this.x = oldX;
+        this.y = oldY;
     }
 }

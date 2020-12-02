@@ -1,7 +1,8 @@
 package com.xnj.tank.net;
 
-import com.xnj.tank.Dir;
-import com.xnj.tank.Tank;
+import com.xnj.tank.GameModel;
+import com.xnj.tank.element.Dir;
+import com.xnj.tank.element.Tank;
 import com.xnj.tank.TankFrame;
 
 import java.io.*;
@@ -28,12 +29,22 @@ public class TankStartMovingMsg extends Msg {
     }
 
     @Override
+    public String toString() {
+        return "TankStartMovingMsg{" +
+                "id=" + id +
+                ", x=" + x +
+                ", y=" + y +
+                ", dir=" + dir +
+                '}';
+    }
+
+    @Override
     public void handle() {
-        if (this.id.equals(TankFrame.getInstance().getMainTank().getId())){
+        if (this.id.equals(GameModel.getInstance().getMainTank().getId())){
             return;
         }
 
-        Tank tank = TankFrame.getInstance().findUUID(this.id);
+        Tank tank = GameModel.getInstance().findUUID(this.id);
         if (tank != null) {
             tank.setMoving(true);
             tank.setX(this.x);

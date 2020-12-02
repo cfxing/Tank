@@ -1,8 +1,9 @@
 package com.xnj.tank.net;
 
-import com.xnj.tank.Dir;
-import com.xnj.tank.Group;
-import com.xnj.tank.Tank;
+import com.xnj.tank.GameModel;
+import com.xnj.tank.element.Dir;
+import com.xnj.tank.element.Group;
+import com.xnj.tank.element.Tank;
 import com.xnj.tank.TankFrame;
 
 import java.io.*;
@@ -126,14 +127,14 @@ public class TankJoinMsg extends Msg{
 
     @Override
     public void handle() {
-        if(this.id.equals(TankFrame.getInstance().getMainTank().getId()) ||
-                TankFrame.getInstance().findUUID(this.id) != null){
+        if(this.id.equals(GameModel.getInstance().getMainTank().getId()) ||
+                GameModel.getInstance().findUUID(this.id) != null){
             return;
         }
         System.out.println(this);
         Tank t = new Tank(this);
-        TankFrame.getInstance().addTank(t);
+        GameModel.getInstance().addTank(t);
 
-        Client.getInstance().send(new TankJoinMsg(TankFrame.getInstance().getMainTank()));
+        Client.getInstance().send(new TankJoinMsg(GameModel.getInstance().getMainTank()));
     }
 }

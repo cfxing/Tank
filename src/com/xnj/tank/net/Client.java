@@ -1,5 +1,6 @@
 package com.xnj.tank.net;
 
+import com.xnj.tank.GameModel;
 import com.xnj.tank.TankFrame;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
@@ -112,8 +113,7 @@ class ClientHandler extends SimpleChannelInboundHandler<Msg> {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-
-        ctx.writeAndFlush(new TankJoinMsg(TankFrame.getInstance().getMainTank()));
+        ctx.writeAndFlush(new TankJoinMsg(GameModel.getInstance().getMainTank()));
 
     }
 }
