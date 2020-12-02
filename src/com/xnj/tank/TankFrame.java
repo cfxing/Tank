@@ -1,5 +1,8 @@
 package com.xnj.tank;
 
+import com.xnj.tank.net.Client;
+import com.xnj.tank.net.TankStartMovingMsg;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -238,6 +241,7 @@ public class TankFrame extends Frame {
                 if (bD) {
                     tank.setDir(DOWN);
                 }
+                Client.getInstance().send(new TankStartMovingMsg(getMainTank()));
             }
         }
 

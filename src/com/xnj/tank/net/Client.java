@@ -1,6 +1,5 @@
 package com.xnj.tank.net;
 
-import com.xnj.tank.Tank;
 import com.xnj.tank.TankFrame;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
@@ -39,8 +38,8 @@ public class Client {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             ChannelPipeline pl = socketChannel.pipeline();
-                            pl.addLast(new TankJoinMsgEncoder())
-                                    .addLast(new TankJoinMsgDecoder())
+                            pl.addLast(new MsgEncoder())
+                                    .addLast(new MsgDecoder())
                                     .addLast(new ClientHandler());
                         }
                     })
@@ -70,9 +69,9 @@ public class Client {
         channel.writeAndFlush(buf);
     }
 
-    public void send(TankJoinMsg msg){
-        ByteBuf buf = Unpooled.copiedBuffer(msg.toBytes());
-        channel.writeAndFlush(buf);
+    public void send(Msg msg){
+//        ByteBuf buf = Unpooled.copiedBuffer(msg.toBytes());
+        channel.writeAndFlush(msg);
     }
 
     public void closeConnect() {
@@ -105,10 +104,10 @@ public class Client {
 //    }
 //}
 
-class ClientHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
+class ClientHandler extends SimpleChannelInboundHandler<Msg> {
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, TankJoinMsg tankJoinMsg) throws Exception {
-        tankJoinMsg.handle();
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, Msg msg) throws Exception {
+        msg.handle();
     }
 
     @Override

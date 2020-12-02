@@ -90,6 +90,13 @@ public class Tank {
         return group;
     }
 
+    public void setX(int x){
+        this.x = x;
+    }
+    public void setY(int y){
+        this.y = y;
+    }
+
     public void setGroup(Group group) {
         this.group = group;
     }

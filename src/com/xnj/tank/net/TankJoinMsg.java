@@ -5,9 +5,7 @@ import com.xnj.tank.Group;
 import com.xnj.tank.Tank;
 import com.xnj.tank.TankFrame;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.UUID;
 
 /**
@@ -39,6 +37,31 @@ public class TankJoinMsg extends Msg{
         this.moving = tank.isMoving();
         this.group = tank.getGroup();
         this.id = tank.getId();
+    }
+
+    @Override
+    public void parse(byte[] bytes) {
+        DataInputStream dis = new DataInputStream(new ByteArrayInputStream(bytes));
+        try {
+            //略过消息类型
+            //dis.readInt();
+
+            this.x = dis.readInt();
+            this.y = dis.readInt();
+            this.dir = Dir.values()[dis.readInt()];
+            this.moving = dis.readBoolean();
+            this.group = Group.values()[dis.readInt()];
+            this.id = new UUID(dis.readLong(), dis.readLong());
+            //this.name = dis.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                dis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -82,6 +105,11 @@ public class TankJoinMsg extends Msg{
         }
 
         return bytes;
+    }
+
+    @Override
+    public MsgType getMsgType() {
+        return MsgType.TankJoin;
     }
 
     @Override

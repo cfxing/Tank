@@ -4,8 +4,8 @@ package test;
 import com.xnj.tank.Dir;
 import com.xnj.tank.Group;
 import com.xnj.tank.net.TankJoinMsg;
-import com.xnj.tank.net.TankJoinMsgDecoder;
-import com.xnj.tank.net.TankJoinMsgEncoder;
+import com.xnj.tank.net.MsgDecoder;
+import com.xnj.tank.net.MsgEncoder;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.embedded.EmbeddedChannel;
@@ -25,7 +25,7 @@ class TankJoinMsgCodecTest {
 		UUID id = UUID.randomUUID();
 		TankJoinMsg msg = new TankJoinMsg(5, 10, Dir.DOWN, true, Group.BAD, id);
 		ch.pipeline()
-			.addLast(new TankJoinMsgEncoder());
+			.addLast(new MsgEncoder());
 		
 		ch.writeOutbound(msg);
 		
@@ -56,7 +56,7 @@ class TankJoinMsgCodecTest {
 		UUID id = UUID.randomUUID();
 		TankJoinMsg msg = new TankJoinMsg(5, 10, Dir.DOWN, true, Group.BAD, id);
 		ch.pipeline()
-			.addLast(new TankJoinMsgDecoder());
+			.addLast(new MsgDecoder());
 		
 		ByteBuf buf = Unpooled.buffer();
 		buf.writeBytes(msg.toBytes());
