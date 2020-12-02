@@ -64,6 +64,7 @@ class ServerChildHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 
         Server.clients.writeAndFlush(msg);
+        ServerFrame.INSTANCE.updateClientMsg(msg.toString());
 //        ByteBuf buf = (ByteBuf)msg;
 //        byte[] bytes = new byte[buf.readableBytes()];
 //        buf.getBytes(buf.readerIndex(), bytes);

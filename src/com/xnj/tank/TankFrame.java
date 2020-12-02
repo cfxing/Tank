@@ -2,6 +2,7 @@ package com.xnj.tank;
 
 import com.xnj.tank.net.Client;
 import com.xnj.tank.net.TankStartMovingMsg;
+import com.xnj.tank.net.TankStopMsg;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -226,9 +227,8 @@ public class TankFrame extends Frame {
         private void setMainTankDir() {
             if (!bL && !bU && !bR && !bD){
                 tank.setMoving(false);
+                Client.getInstance().send(new TankStopMsg(getMainTank()));
             }else{
-                tank.setMoving(true);
-
                 if (bL) {
                     tank.setDir(LEFT);
                 }
@@ -241,7 +241,12 @@ public class TankFrame extends Frame {
                 if (bD) {
                     tank.setDir(DOWN);
                 }
-                Client.getInstance().send(new TankStartMovingMsg(getMainTank()));
+                if (!tank.isMoving()){
+
+                    Client.getInstance().send(new TankStartMovingMsg(getMainTank()));
+                }
+                tank.setMoving(true);
+
             }
         }
 

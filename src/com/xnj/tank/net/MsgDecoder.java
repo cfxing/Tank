@@ -40,19 +40,22 @@ public class MsgDecoder extends ByteToMessageDecoder {
         byteBuf.readBytes(bytes);
 
         Msg msg = null;
+        //Class.forName(msgType.toString + "Msg").constructor.newInstance();
         switch (msgType) {
             case TankJoin:
                 msg = new TankJoinMsg();
-                msg.parse(bytes);
-                list.add(msg);
                 break;
             case TankStartMoving:
                 msg = new TankStartMovingMsg();
-                msg.parse(bytes);
-                list.add(msg);
+                break;
+            case TankStop:
+                msg = new TankStopMsg();
             default:
                 break;
         }
+
+        msg.parse(bytes);
+        list.add(msg);
 
     }
 }
